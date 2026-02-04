@@ -20,11 +20,11 @@ export default function EmailCopy() {
       <h1 className="text-lg font-medium text-zinc-300">{email}</h1>
       <button
         onClick={copyToClipboard}
-        className="flex items-center gap-2 cursor-pointer font-semibold rounded-lg border-none px-3 py-2 text-sm bg-[#500000] hover:bg-[#732d2d] text-white transition-all duration-300 shadow-lg shadow-[#500000]/20"
+        className="flex items-center gap-2 cursor-pointer font-semibold rounded-lg border-none px-3 py-2 text-sm bg-[#1e293b] hover:bg-[#334155] text-white transition-all duration-300 shadow-lg shadow-[#1e293b]/20"
       >
         {copied ? (
           <>
-            <FaCheck className="text-[#3eb489]" />
+            <FaCheck className="text-[#7dd3fc]" />
             Copied!
           </>
         ) : (

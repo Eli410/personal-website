@@ -15,7 +15,7 @@ const technologies = [
 ];
 ---
 
-<div class="relative overflow-x-hidden px-8 py-8 -mt-24 border-y border-[#998542]/10 bg-[#0a0a0f]/50">
+<div class="relative overflow-x-hidden px-8 py-8 -mt-24 border-y border-[#38bdf8]/10 bg-[#0f172a]/50">
   <div class="animate-scroll hover:animate-paused flex w-max gap-12 md:gap-20">
     {
       technologies.concat(technologies, technologies).map((tech) => (
@@ -29,7 +29,7 @@ const technologies = [
             loading="lazy"
             onerror={`this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}/${tech.icon}-plain.svg'`}
           />
-          <span class="text-base font-medium text-zinc-400 group-hover:text-[#998542] transition-colors">
+          <span class="text-base font-medium text-zinc-400 group-hover:text-[#38bdf8] transition-colors">
             {tech.name}
           </span>
         </div>

@@ -9,15 +9,15 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Color System - Maroon & Gold inspired by Texas A&M */
+/* Color System - Minimal Slate */
 :root {
-  --primary: #500000;
-  --primary-light: #732d2d;
-  --secondary: #998542;
-  --accent: #3eb489;
-  --accent-glow: #2dd4bf;
-  --surface: #0a0a0f;
-  --surface-elevated: #12121a;
+  --primary: #1e293b;
+  --primary-light: #334155;
+  --secondary: #f8fafc;
+  --accent: #38bdf8;
+  --accent-glow: #7dd3fc;
+  --surface: #0f172a;
+  --surface-elevated: #1e293b;
 }
 
 .primary {
@@ -60,13 +60,13 @@
 
 /* Glowing accent effect */
 .glow-accent {
-  box-shadow: 0 0 20px rgba(62, 180, 137, 0.3);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
 }
 
 /* Card styling */
 .card-elevated {
-  background: linear-gradient(135deg, #12121a 0%, #0d0d14 100%);
-  border: 1px solid rgba(153, 133, 66, 0.1);
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid rgba(56, 189, 248, 0.1);
 }
 
 /* estilos del home */
@@ -134,4 +134,131 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   opacity: 0.03;
   pointer-events: none;
+}
+
+/* Animated Background Effects */
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #030712 0%, #0f172a 50%, #020617 100%);
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: -25%;
+  left: -25%;
+  background: 
+    radial-gradient(ellipse 800px 800px at 20% 30%, rgba(56, 189, 248, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 700px 700px at 80% 70%, rgba(125, 211, 252, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 600px 600px at 60% 20%, rgba(14, 165, 233, 0.12) 0%, transparent 50%);
+  animation: bgShift 20s ease-in-out infinite;
+}
+
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse 900px 900px at 70% 60%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 700px 700px at 30% 80%, rgba(125, 211, 252, 0.1) 0%, transparent 50%);
+  animation: bgShift2 25s ease-in-out infinite;
+}
+
+@keyframes bgShift {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(5%, 3%) rotate(1deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-3%, 5%) rotate(-1deg);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-5%, -3%) rotate(0.5deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes bgShift2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  33% {
+    transform: translate(-4%, 4%) scale(1.05);
+    opacity: 0.7;
+  }
+  66% {
+    transform: translate(4%, -4%) scale(0.95);
+    opacity: 1;
+  }
+}
+
+/* Prevent orbs from causing scrollbars */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Floating orbs container - contained within viewport */
+#orbs-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-orb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  filter: blur(140px);
+  will-change: transform;
+}
+
+/* Two layers for smooth color cross-fade - slow transition to background */
+.floating-orb .orb-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transition: opacity 8s ease-in-out;
+}
+
+.floating-orb .orb-layer-1 {
+  opacity: 1;
+}
+
+.floating-orb .orb-layer-2 {
+  opacity: 0;
+}
+
+/* Subtle color pulse on body */
+@keyframes colorPulse {
+  0%, 100% {
+    background-color: #030712;
+  }
+  33% {
+    background-color: #0c1425;
+  }
+  66% {
+    background-color: #061020;
+  }
+}
+
+body {
+  animation: colorPulse 20s ease-in-out infinite;
 }

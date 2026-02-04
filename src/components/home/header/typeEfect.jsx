@@ -3,7 +3,7 @@ import Typewriter from "typewriter-effect";
 
 const TypewriterComponent = () => {
   return (
-    <div className="notranslate mt-5 text-2xl md:text-4xl font-semibold text-[#3eb489] font-mono">
+    <div className="notranslate mt-5 text-2xl md:text-4xl font-semibold text-[#7dd3fc] font-mono">
       <Typewriter
         options={{
           strings: [

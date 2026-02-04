@@ -47,7 +47,7 @@
     transform: translateY(-50%);
     width: 4px;
     height: 70%;
-    background: linear-gradient(180deg, #500000, #998542);
+    background: linear-gradient(180deg, #1e293b, #38bdf8);
     border-radius: 4px;
   }
 }
@@ -66,7 +66,7 @@
 }
 
 .job-title button:hover {
-  color: #998542;
+  color: #38bdf8;
 }
 
 .job-title button.active {
@@ -95,10 +95,10 @@
 }
 
 .badge {
-  background-color: #500000;
+  background-color: #1e293b;
   border-radius: 1000px;
   padding: 2px 12px;
-  border: 1px solid #500000;
+  border: 1px solid #1e293b;
   font-size: 0.875rem;
   color: white;
 }

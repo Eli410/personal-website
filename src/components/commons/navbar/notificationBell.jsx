@@ -77,18 +77,18 @@ export default function NotificationBell() {
         aria-expanded={open}
         aria-label="Notifications"
         onClick={() => setOpen((v) => !v)}
-        className="relative rounded-full p-2 hover:bg-[#12121a] transition-colors"
+        className="relative rounded-full p-2 hover:bg-[#1e293b] transition-colors"
       >
-        <FaBell className="text-xl text-zinc-400 hover:text-[#998542] cursor-pointer transition-colors" />
+        <FaBell className="text-xl text-zinc-400 hover:text-[#38bdf8] cursor-pointer transition-colors" />
         {unreadCount > 0 && lastBaseId && (
-          <span className="absolute top-0 right-0 inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#500000] text-xs text-white">
+          <span className="absolute top-0 right-0 inline-flex h-4 w-4 items-center justify-center rounded-full bg-[#1e293b] text-xs text-white">
             {lastBaseId}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 z-50 mt-2 w-72 max-w-sm rounded-xl border border-[#998542]/10 bg-[#12121a] shadow-lg">
+        <div className="absolute right-0 z-50 mt-2 w-72 max-w-sm rounded-xl border border-[#38bdf8]/10 bg-[#1e293b] shadow-lg">
           <div className="p-4">
             <div className="mb-3 flex items-center justify-between">
               <h4 className="text-sm font-semibold text-white">
@@ -97,7 +97,7 @@ export default function NotificationBell() {
             </div>
 
             {read.length > 0 ? (
-              <ul className="max-h-48 divide-y divide-[#998542]/10 overflow-auto">
+              <ul className="max-h-48 divide-y divide-[#38bdf8]/10 overflow-auto">
                 {read.map((n) => (
                   <li key={n.id} className="py-3 text-sm text-zinc-400">
                     {n.text}

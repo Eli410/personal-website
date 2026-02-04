@@ -25,7 +25,180 @@ const pageDescription = description || "Software Engineer & Computer Engineering
     <title>{pageTitle}</title>
   </head>
   <body class="bg-gray-950 text-white font-outfit">
+    <!-- Animated background base -->
+    <div class="animated-bg"></div>
+    <!-- Floating color orbs container -->
+    <div id="orbs-container"></div>
     <Navbar />
     <slot />
+    
+    <script>
+      // Floating Orbs Animation - smooth color cross-fade, responsive size
+      (function() {
+        const container = document.getElementById('orbs-container');
+        if (!container) return;
+
+        // Orb size as % of viewport - bigger, softer presence
+        const MIN_ORB_PX = 220;
+        const MAX_ORB_PX = 950;
+        const MIN_ORB_RATIO = 0.5;
+        const MAX_ORB_RATIO = 0.78;
+
+        function getOrbSize(seed) {
+          const vp = Math.min(window.innerWidth, window.innerHeight);
+          const ratio = MIN_ORB_RATIO + (seed * (MAX_ORB_RATIO - MIN_ORB_RATIO));
+          const size = vp * ratio;
+          return Math.round(Math.max(MIN_ORB_PX, Math.min(MAX_ORB_PX, size)));
+        }
+
+        // Dim center = soft glow, less obviously an orb
+        function gradientWithDimCenter(color) {
+          const dimCenter = color.replace(/[\d.]+\)\s*$/, '0.06)');
+          return `radial-gradient(circle, ${dimCenter} 0%, ${color} 40%, transparent 75%)`;
+        }
+        const colors = [
+          ['rgba(56, 189, 248, 0.4)', 'rgba(125, 211, 252, 0.45)', 'rgba(14, 165, 233, 0.4)'],
+          ['rgba(139, 92, 246, 0.4)', 'rgba(167, 139, 250, 0.45)', 'rgba(99, 102, 241, 0.4)']
+        ];
+
+        // Create two orbs with two layers each for cross-fade
+        const orbs = [];
+        for (let i = 0; i < 2; i++) {
+          const orb = document.createElement('div');
+          orb.className = 'floating-orb';
+          
+          const layer1 = document.createElement('div');
+          layer1.className = 'orb-layer orb-layer-1';
+          const layer2 = document.createElement('div');
+          layer2.className = 'orb-layer orb-layer-2';
+          orb.appendChild(layer1);
+          orb.appendChild(layer2);
+          
+          // Size from viewport (each orb gets a different ratio via seed 0.4 and 0.55)
+          const size = getOrbSize(0.35 + i * 0.2);
+          orb.style.width = size + 'px';
+          orb.style.height = size + 'px';
+          
+          container.appendChild(orb);
+          
+          const startX = i === 0 ? window.innerWidth * 0.3 : window.innerWidth * 0.7;
+          const startY = i === 0 ? window.innerHeight * 0.3 : window.innerHeight * 0.7;
+          
+          orbs.push({
+            element: orb,
+            layer1: layer1,
+            layer2: layer2,
+            activeLayer: 1,
+            x: startX,
+            y: startY,
+            targetX: 0,
+            targetY: 0,
+            colorIndex: i,
+            currentColorIdx: 0,
+            colorDirection: 1,
+            size: size,
+            sizeSeed: 0.35 + i * 0.2
+          });
+          
+          const palette = colors[i];
+          layer1.style.background = gradientWithDimCenter(palette[0]);
+          layer2.style.background = gradientWithDimCenter(palette[1]);
+          
+          setNewTarget(orbs[i]);
+        }
+
+        function setNewTarget(orb) {
+          const padding = orb.size * 0.4;
+          const minX = padding;
+          const maxX = window.innerWidth - padding;
+          const minY = padding;
+          const maxY = window.innerHeight - padding;
+          
+          orb.targetX = minX + Math.random() * Math.max(0, maxX - minX);
+          orb.targetY = minY + Math.random() * Math.max(0, maxY - minY);
+        }
+
+        function updateOrbSize(orb) {
+          orb.size = getOrbSize(orb.sizeSeed);
+          orb.element.style.width = orb.size + 'px';
+          orb.element.style.height = orb.size + 'px';
+        }
+
+        function updateOrbColor(orb) {
+          const palette = colors[orb.colorIndex];
+          
+          // Move to next color (ping-pong)
+          orb.currentColorIdx += orb.colorDirection;
+          if (orb.currentColorIdx >= palette.length - 1) {
+            orb.currentColorIdx = palette.length - 1;
+            orb.colorDirection = -1;
+          } else if (orb.currentColorIdx <= 0) {
+            orb.currentColorIdx = 0;
+            orb.colorDirection = 1;
+          }
+          
+          const newColor = palette[orb.currentColorIdx];
+          
+          // Cross-fade: set new color on hidden layer, then swap visibility
+          if (orb.activeLayer === 1) {
+            orb.layer2.style.background = gradientWithDimCenter(newColor);
+            orb.layer1.style.opacity = '0';
+            orb.layer2.style.opacity = '1';
+            orb.activeLayer = 2;
+          } else {
+            orb.layer1.style.background = gradientWithDimCenter(newColor);
+            orb.layer2.style.opacity = '0';
+            orb.layer1.style.opacity = '1';
+            orb.activeLayer = 1;
+          }
+        }
+
+        // Color change interval - slow so transition to background feels gradual
+        setInterval(() => {
+          orbs.forEach(updateOrbColor);
+        }, 10000);
+
+        // Movement animation
+        function moveToTarget(orb) {
+          const dx = orb.targetX - orb.x;
+          const dy = orb.targetY - orb.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const duration = 15 + (distance / window.innerWidth) * 10;
+          
+          orb.x = orb.targetX;
+          orb.y = orb.targetY;
+          
+          orb.element.style.transition = `transform ${duration}s ease-in-out`;
+          orb.element.style.transform = `translate(${orb.x - orb.size/2}px, ${orb.y - orb.size/2}px)`;
+          
+          setTimeout(() => {
+            setNewTarget(orb);
+            moveToTarget(orb);
+          }, duration * 1000);
+        }
+
+        // Start animations
+        orbs.forEach((orb, i) => {
+          orb.element.style.transform = `translate(${orb.x - orb.size/2}px, ${orb.y - orb.size/2}px)`;
+          setTimeout(() => moveToTarget(orb), 500 + i * 1000);
+        });
+
+        // Handle resize - recalc orb size and clamp positions
+        window.addEventListener('resize', () => {
+          orbs.forEach(orb => {
+            updateOrbSize(orb);
+            const padding = orb.size * 0.4;
+            const minX = padding;
+            const maxX = window.innerWidth - padding;
+            const minY = padding;
+            const maxY = window.innerHeight - padding;
+            orb.x = Math.max(minX, Math.min(maxX, orb.x));
+            orb.y = Math.max(minY, Math.min(maxY, orb.y));
+            orb.element.style.transform = `translate(${orb.x - orb.size/2}px, ${orb.y - orb.size/2}px)`;
+            setNewTarget(orb);
+          });
+        });
+      })();
+    </script>
   </body>
 </html>

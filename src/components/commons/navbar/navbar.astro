@@ -17,13 +17,13 @@ const links = [
 
   <!-- Navbar -->
   <nav
-    class="fixed top-0 left-0 w-full z-50 bg-gray-950/80 backdrop-blur-md border-b border-[#998542]/10"
+    class="fixed top-0 left-0 w-full z-50 bg-gray-950/80 backdrop-blur-md border-b border-[#38bdf8]/10"
   >
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
       <!-- Logo -->
       <a href="/" class="flex items-center">
         <h3
-          class="text-[#998542] text-3xl font-bold"
+          class="text-[#38bdf8] text-3xl font-bold"
         >
           EC
         </h3>
@@ -36,7 +36,7 @@ const links = [
             <li>
               <a
                 href={link.href}
-                class="nav-link font-medium transition-colors duration-300 text-zinc-300 hover:text-[#998542]"
+                class="nav-link font-medium transition-colors duration-300 text-zinc-300 hover:text-[#38bdf8]"
               >
                 {link.name}
               </a>
@@ -54,7 +54,7 @@ const links = [
             aria-label="LinkedIn"
           >
             <FaLinkedinIn
-              className="h-6 w-6 cursor-pointer text-zinc-400 hover:text-[#998542] transition-colors"
+              className="h-6 w-6 cursor-pointer text-zinc-400 hover:text-[#38bdf8] transition-colors"
             />
           </a>
 
@@ -64,7 +64,7 @@ const links = [
             rel="noopener noreferrer"
             aria-label="GitHub"
           >
-            <FaGithub className="h-6 w-6 cursor-pointer text-zinc-400 hover:text-[#998542] transition-colors" />
+            <FaGithub className="h-6 w-6 cursor-pointer text-zinc-400 hover:text-[#38bdf8] transition-colors" />
           </a>
         </li>
       </ul>
@@ -88,7 +88,7 @@ const links = [
 
   <!-- Mobile sidebar -->
   <div
-    class="fixed top-0 right-0 h-full w-64 bg-[#0a0a0f] border-l border-[#998542]/10 shadow-lg transform translate-x-full transition-transform duration-300 peer-checked:translate-x-0 z-50 md:translate-x-full md:hidden"
+    class="fixed top-0 right-0 h-full w-64 bg-[#0f172a] border-l border-[#38bdf8]/10 shadow-lg transform translate-x-full transition-transform duration-300 peer-checked:translate-x-0 z-50 md:translate-x-full md:hidden"
   >
     <div class="flex justify-end p-4">
       <label for="menu-toggle" class="cursor-pointer">
@@ -102,7 +102,7 @@ const links = [
           <li>
             <a
               href={link.href}
-              class="nav-link-mobile text-lg font-medium text-zinc-300 hover:text-[#998542] transition-colors duration-300"
+              class="nav-link-mobile text-lg font-medium text-zinc-300 hover:text-[#38bdf8] transition-colors duration-300"
             >
               {link.name}
             </a>
@@ -119,7 +119,7 @@ const links = [
         rel="noopener noreferrer"
         aria-label="LinkedIn"
       >
-        <FaLinkedinIn className="h-6 w-6 text-zinc-400 hover:text-[#998542]" />
+        <FaLinkedinIn className="h-6 w-6 text-zinc-400 hover:text-[#38bdf8]" />
       </a>
       <a
         href="https://github.com/Eli410"
@@ -127,7 +127,7 @@ const links = [
         rel="noopener noreferrer"
         aria-label="GitHub"
       >
-        <FaGithub className="h-6 w-6 text-zinc-400 hover:text-[#998542]" />
+        <FaGithub className="h-6 w-6 text-zinc-400 hover:text-[#38bdf8]" />
       </a>
     </div>
   </div>
@@ -151,11 +151,11 @@ const links = [
         const href = hrefAttr?.replace(/\/$/, "") || "" || "/";
 
         if (href === currentPath) {
-          link.classList.add("text-[#998542]", "font-semibold");
+          link.classList.add("text-[#38bdf8]", "font-semibold");
           link.classList.remove("text-zinc-300");
         } else {
-          link.classList.remove("text-[#998542]", "font-semibold");
-          if (!link.classList.contains("hover:text-[#998542]")) {
+          link.classList.remove("text-[#38bdf8]", "font-semibold");
+          if (!link.classList.contains("hover:text-[#38bdf8]")) {
             link.classList.add("text-zinc-300");
           }
         }

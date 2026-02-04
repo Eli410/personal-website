@@ -13,7 +13,7 @@ const { titulo, imagen, tecnologias, demo, codigo } = Astro.props;
 ---
 
 <div
-  class="group flex w-full max-w-md mx-auto flex-col overflow-hidden rounded-xl bg-[#12121a] border border-[#998542]/10 transition-all duration-300 hover:scale-[1.02] hover:border-[#998542]/30"
+  class="group flex w-full max-w-md mx-auto flex-col overflow-hidden rounded-xl bg-[#1e293b] border border-[#38bdf8]/10 transition-all duration-300 hover:scale-[1.02] hover:border-[#38bdf8]/30"
 >
   <img
     src={imagen}
@@ -28,7 +28,7 @@ const { titulo, imagen, tecnologias, demo, codigo } = Astro.props;
     <div class="flex flex-wrap gap-2 mb-4">
       {
         tecnologias.map((tech) => (
-          <span class="rounded-md bg-[#500000]/20 text-[#998542] px-2 py-0.5 text-xs font-semibold">
+          <span class="rounded-md bg-[#1e293b]/20 text-[#38bdf8] px-2 py-0.5 text-xs font-semibold">
             {tech}
           </span>
         ))
@@ -40,7 +40,7 @@ const { titulo, imagen, tecnologias, demo, codigo } = Astro.props;
         href={demo}
         target="_blank"
         rel="noopener noreferrer"
-        class="w-full text-center border border-[#998542]/50 text-[#998542] py-2 rounded-lg text-sm font-semibold hover:bg-[#998542] hover:text-[#0a0a0f] transition-all duration-300"
+        class="w-full text-center border border-[#38bdf8]/50 text-[#38bdf8] py-2 rounded-lg text-sm font-semibold hover:bg-[#38bdf8] hover:text-[#0f172a] transition-all duration-300"
       >
         Demo
       </a>
@@ -49,7 +49,7 @@ const { titulo, imagen, tecnologias, demo, codigo } = Astro.props;
         href={codigo}
         target="_blank"
         rel="noopener noreferrer"
-        class="w-full text-center border border-[#998542]/50 text-[#998542] py-2 rounded-lg text-sm font-semibold hover:bg-[#998542] hover:text-[#0a0a0f] transition-all duration-300"
+        class="w-full text-center border border-[#38bdf8]/50 text-[#38bdf8] py-2 rounded-lg text-sm font-semibold hover:bg-[#38bdf8] hover:text-[#0f172a] transition-all duration-300"
       >
         Code
       </a>
