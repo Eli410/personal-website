@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* Typography */
+.font-outfit {
+  font-family: 'Outfit', system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Color System - Maroon & Gold inspired by Texas A&M */
+:root {
+  --primary: #500000;
+  --primary-light: #732d2d;
+  --secondary: #998542;
+  --accent: #3eb489;
+  --accent-glow: #2dd4bf;
+  --surface: #0a0a0f;
+  --surface-elevated: #12121a;
+}
+
+.primary {
+  color: var(--primary);
+}
+.secondary {
+  color: var(--secondary);
+}
+.bg-primary {
+  background-color: var(--primary);
+}
+.bg-secondary {
+  background-color: var(--primary-light);
+}
+.text-primary {
+  color: var(--secondary);
+}
+
+/* reglas hover (usar estas clases directamente) */
+.hover-text-secondary:hover {
+  color: var(--secondary);
+}
+.hover-bg-secondary:hover {
+  background-color: var(--primary-light);
+}
+.hover\:bg-secondary:hover {
+  background-color: var(--primary-light);
+}
+.hover\:text-secondary:hover {
+  color: var(--secondary);
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 0 var(--primary);
+}
+
+.text-shadow-cyan {
+  text-shadow: 2px 2px 0 var(--accent);
+}
+
+/* Glowing accent effect */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(62, 180, 137, 0.3);
+}
+
+/* Card styling */
+.card-elevated {
+  background: linear-gradient(135deg, #12121a 0%, #0d0d14 100%);
+  border: 1px solid rgba(153, 133, 66, 0.1);
+}
+
+/* estilos del home */
+
+@keyframes gradientMove {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-250px) translateY(120px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes gradientMove2 {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(250px) translateY(-120px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.animate-gradientMove {
+  animation: gradientMove 8s ease-in-out infinite alternate;
+}
+
+.animate-gradientMove2 {
+  animation: gradientMove2 8s ease-in-out infinite alternate;
+}
+
+/* Staggered animation delays for page load */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Subtle grain texture overlay */
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}

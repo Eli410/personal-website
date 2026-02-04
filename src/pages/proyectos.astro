@@ -1,0 +1,165 @@
+---
+import "../styles/projects.css";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/commons/hero/hero.astro";
+import ProjectCard from "../components/project/proyectCard.astro";
+import { proyectos } from "../data/projectData.js";
+---
+
+<Layout title="Projects" description="Explore my projects and work">
+  <Hero titulo="Projects" />
+
+  <!-- Filter buttons -->
+  <div class="mt-6 mb-6 flex flex-wrap justify-center gap-3 px-2">
+    <button class="filter-btn cursor-pointer rounded-full bg-[#998542] px-5 py-1.5 text-sm font-bold text-[#0a0a0f] transition-all duration-150 active:translate-y-0.5" data-filter="all">
+      All
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#998542] px-5 py-1.5 text-sm font-bold text-[#0a0a0f] transition-all duration-150 active:translate-y-0.5" data-filter="fullstack">
+      Full Stack
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#998542] px-5 py-1.5 text-sm font-bold text-[#0a0a0f] transition-all duration-150 active:translate-y-0.5" data-filter="frontend">
+      Frontend
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#998542] px-5 py-1.5 text-sm font-bold text-[#0a0a0f] transition-all duration-150 active:translate-y-0.5" data-filter="backend">
+      Backend
+    </button>
+  </div>
+
+  <!-- Cards -->
+  <div
+    id="projects-container"
+    class="4xl:px-96 flex flex-wrap justify-center gap-5 px-3 pt-5 xl:px-32 2xl:px-60"
+  >
+    {
+      proyectos.map((proyecto, index) => (
+        <ProjectCard
+          index={index}
+          titulo={proyecto.titulo}
+          descripcion={proyecto.descripcion}
+          imagen={proyecto.imagen}
+          tecnologias={proyecto.tecnologias}
+          demo={proyecto.demo}
+          codigo={proyecto.codigo}
+          categoria={proyecto.categoria}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Load more button -->
+  <div class="flex justify-center mt-8">
+    <button
+      id="load-more"
+      class="px-6 py-2 cursor-pointer bg-[#998542] text-[#0a0a0f] font-bold rounded-full hover:bg-[#b39a50] active:translate-y-0.5 transition-all"
+    >
+      Load More
+    </button>
+  </div>
+
+</Layout>
+
+<script is:inline>
+(function () {
+  /* ---------------- CONFIG ---------------- */
+  const VISIBLE_CLASS = "project-visible";
+  const HIDDEN_CLASS = "project-hidden";
+  const HIDE_TIMEOUT = 300;
+
+  const INITIAL_VISIBLE = 12;
+  let itemsToShow = INITIAL_VISIBLE;
+  let activeFilter = "all";
+  let cards = [];
+  let filterButtons = [];
+  let loadMoreBtn = null;
+
+  /* ---------------- HELPERS ---------------- */
+  function queryElements() {
+    cards = Array.from(document.querySelectorAll("[data-index]"));
+    filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
+    loadMoreBtn = document.getElementById("load-more");
+  }
+
+  function showCard(card) {
+    card.style.display = "flex";
+    requestAnimationFrame(() => {
+      card.classList.remove(HIDDEN_CLASS);
+      card.classList.add(VISIBLE_CLASS);
+    });
+  }
+
+  function hideCard(card) {
+    card.classList.remove(VISIBLE_CLASS);
+    card.classList.add(HIDDEN_CLASS);
+    setTimeout(() => {
+      if (card.classList.contains(HIDDEN_CLASS)) {
+        card.style.display = "none";
+      }
+    }, HIDE_TIMEOUT);
+  }
+
+  function setActiveButton(btn) {
+    filterButtons.forEach((b) => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+  }
+
+  /* ---------------- FILTERING ---------------- */
+  function applyFilter(filter) {
+    activeFilter = filter ?? "all";
+    const normalized = activeFilter.toLowerCase();
+
+    cards = Array.from(document.querySelectorAll("[data-index]"));
+
+    const filteredCards = cards.filter((card) => {
+      const categoria = (card.dataset.categoria ?? "").toLowerCase();
+      return normalized === "all" || categoria === normalized;
+    });
+
+    cards.forEach((c) => hideCard(c));
+
+    filteredCards.forEach((card, i) => {
+      if (i < itemsToShow) showCard(card);
+    });
+
+    // Show load more button only if there are more items
+    if (!loadMoreBtn) return;
+    loadMoreBtn.style.display = filteredCards.length > itemsToShow ? "block" : "none";
+  }
+
+  /* ---------------- Filter events ---------------- */
+  function attachFilterEvents() {
+    if (!filterButtons.length) return;
+    filterButtons.forEach((btn) => {
+      btn.onclick = () => {
+        itemsToShow = INITIAL_VISIBLE; 
+        const filter = btn.dataset.filter || "all";
+        setActiveButton(btn);
+        applyFilter(filter);
+      };
+    });
+
+    // Activate "All" on init
+    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+    setActiveButton(allBtn);
+  }
+
+  /* ---------------- Load more ---------------- */
+  function attachLoadMore() {
+    if (!loadMoreBtn) return;
+    loadMoreBtn.onclick = () => {
+      itemsToShow += INITIAL_VISIBLE; 
+      applyFilter(activeFilter); 
+    };
+  }
+
+  /* ---------------- INIT ---------------- */
+  function init() {
+    queryElements();
+    attachFilterEvents();
+    attachLoadMore();
+    applyFilter("all");
+  }
+
+  document.addEventListener("astro:page-load", init);
+  window.addEventListener("load", init);
+})();
+</script>

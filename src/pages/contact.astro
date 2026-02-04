@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CopyMail from "../components/links/copyMail.jsx";
+
+const links = [
+  {
+    href: "https://www.linkedin.com/in/Eli-chen",
+    label: "LinkedIn",
+  },
+  { href: "https://github.com/Eli410", label: "GitHub" },
+  { href: "mailto:ziyangc410@gmail.com", label: "Email" },
+];
+---
+
+<Layout title="Contact" description="Get in touch with Eli Chen">
+  <section
+    class="bg-[#0a0a0f] flex min-h-screen flex-col items-center justify-center px-6"
+  >
+    <div class="mb-2 mt-11">
+      <div class="relative flex items-center justify-center">
+        <!-- Profile placeholder with initials -->
+        <div class="h-32 w-32 rounded-full bg-[#12121a] border border-[#998542]/20 flex items-center justify-center">
+          <span class="text-3xl font-bold text-[#998542]">EC</span>
+        </div>
+      </div>
+    </div>
+
+    <CopyMail client:visible />
+
+    <!-- Links list -->
+    <div class="w-full max-w-xs space-y-4">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block font-semibold w-full rounded-xl bg-[#500000] hover:bg-[#732d2d] px-6 py-4 text-center text-white transition-all duration-300 shadow-lg shadow-[#500000]/20 hover:shadow-[#500000]/40 hover:scale-[1.02]"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Additional info -->
+    <div class="mt-12 text-center max-w-md">
+      <p class="text-zinc-400 text-sm leading-relaxed">
+        I'm currently based in <span class="text-[#998542]">Katy, TX</span> and available for 
+        full-time opportunities and interesting projects.
+      </p>
+      <p class="text-zinc-500 text-sm mt-2">
+        No sponsorship required to work in the US.
+      </p>
+    </div>
+  </section>
+</Layout>
+

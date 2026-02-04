@@ -1,0 +1,32 @@
+---
+import ServiceCard from "./ServiceCard.astro";
+import { FaLaptopCode, FaDatabase, FaBrain } from "react-icons/fa"; 
+---
+
+<section class="site-container mt-14 mx-auto max-w-6xl px-4">
+	<h2
+		class="text-4xl font-bold flex flex-col items-center gap-6 text-center whitespace-nowrap text-white md:flex-row md:items-center md:text-end"
+	>
+		<span class="hidden h-1 grow rounded-lg bg-gradient-to-r from-[#998542]/30 to-[#500000] md:block"></span>
+		<span>What I <span class="text-[#998542]">Build</span></span>
+	</h2>
+
+	<div class="mt-10 grid gap-6 md:grid-cols-3">
+		<ServiceCard
+			icon={FaLaptopCode}
+			title="Full-Stack Development"
+			description="Building modern web applications with React, Next.js, Node.js, and various databases. From responsive frontends to scalable backends."
+		/>
+		<ServiceCard
+			icon={FaDatabase}
+			title="Data Engineering"
+			description="Creating data pipelines, visualizations, and analytics dashboards using Python, Azure, SQL, and various data processing tools."
+		/>
+
+		<ServiceCard
+			icon={FaBrain}
+			title="Machine Learning"
+			description="Developing ML models for prediction, classification, and analysis using PyTorch, TensorFlow, and traditional ML techniques."
+		/>
+	</div>
+</section>

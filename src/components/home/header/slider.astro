@@ -1,0 +1,59 @@
+---
+const technologies = [
+  { name: "Python", icon: "python" },
+  { name: "React", icon: "react" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "Next.js", icon: "nextjs" },
+  { name: "Node.js", icon: "nodejs" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: "Git", icon: "git" },
+  { name: "SQL", icon: "mysql" },
+  { name: "PyTorch", icon: "pytorch" },
+  { name: "Azure", icon: "azure" },
+  { name: "Linux", icon: "linux" },
+  { name: "TailwindCSS", icon: "tailwindcss" },
+];
+---
+
+<div class="relative overflow-x-hidden px-8 py-8 -mt-24 border-y border-[#998542]/10 bg-[#0a0a0f]/50">
+  <div class="animate-scroll hover:animate-paused flex w-max gap-12 md:gap-20">
+    {
+      technologies.concat(technologies, technologies).map((tech) => (
+        <div class="group flex items-center gap-3 transition-all duration-300">
+          <img
+            src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}/${tech.icon}-original.svg`}
+            alt={tech.name}
+            class="h-7 w-auto object-contain transition-transform group-hover:scale-110"
+            width="30"
+            height="30"
+            loading="lazy"
+            onerror={`this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${tech.icon}/${tech.icon}-plain.svg'`}
+          />
+          <span class="text-base font-medium text-zinc-400 group-hover:text-[#998542] transition-colors">
+            {tech.name}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style is:global>
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 60s linear infinite;
+  }
+
+  @media (min-width: 768px) {
+    .animate-scroll {
+      animation-duration: 80s;
+    }
+  }
+</style>
