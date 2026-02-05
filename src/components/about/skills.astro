@@ -21,18 +21,14 @@
         { name: "Next.js", icon: "nextjs" },
         { name: "Azure", icon: "azure" },
       ].map((skill) => (
-        <div class="relative group">
-          <div class="absolute inset-0 -z-10 rounded-lg blur-3xl opacity-0 transition-opacity group-hover:opacity-100" />
-
-          <div class="flex flex-col items-center bg-[#1e293b] border border-[#38bdf8]/10 p-4 rounded-lg shadow-md transition-all duration-300 hover:scale-105 hover:border-[#38bdf8]/30">
-            <img
-              src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-original.svg`}
-              alt={skill.name}
-              class="w-12 h-12"
-              onerror={`this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-plain.svg'`}
-            />
-            <p class="mt-2 text-white text-lg font-semibold">{skill.name}</p>
-          </div>
+        <div class="flex flex-col items-center bg-[#1e293b] border border-[#38bdf8]/10 p-4 rounded-lg shadow-md">
+          <img
+            src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-original.svg`}
+            alt={skill.name}
+            class="w-12 h-12"
+            onerror={`this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-plain.svg'`}
+          />
+          <p class="mt-2 text-white text-lg font-semibold">{skill.name}</p>
         </div>
       ))
     }
