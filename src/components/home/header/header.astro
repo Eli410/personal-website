@@ -1,22 +1,22 @@
 ---
-import SocialIcons from "../../commons/socialIcons/socialIcons.jsx";
 import TypeEfect from "../header/typeEfect.jsx";
 import { proyectos } from "../../../data/projectData.js";
 
-// Shuffle and pick 3 random projects at build time
-const shuffled = [...proyectos].sort(() => Math.random() - 0.5);
-const randomProjects = shuffled.slice(0, 3);
+// Two random featured projects (no repeat)
+const featuredTitles = ["Instant Karaoke", "Aggie Class Alert", "Maroon Rides", "HPC Runner"];
+const featuredPool = featuredTitles
+  .map((title) => proyectos.find((p) => p.titulo === title))
+  .filter(Boolean);
+const shuffled = [...featuredPool].sort(() => Math.random() - 0.5);
+const featuredProjects = shuffled.slice(0, 2);
 ---
 
-<header class="relative min-h-auto overflow-visible grain-overlay">
-  <!-- Subtle grid pattern -->
-  <div class="absolute inset-0 bg-[linear-gradient(rgba(153,133,66,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(153,133,66,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-
+<header class="relative min-h-auto overflow-visible">
   <main
     class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-20"
   >
     <h1 class="animate-fadeInUp stagger-1 text-4xl md:text-7xl font-bold text-white">
-      Hey, I'm <span class="text-[#38bdf8]">Eli Chen</span>
+      Howdy, I'm <span class="text-[#38bdf8]">Eli Chen</span>
     </h1>
 
     <TypeEfect client:visible staggerClass="stagger-2" />
@@ -24,70 +24,52 @@ const randomProjects = shuffled.slice(0, 3);
     <p
       class="animate-fadeInUp stagger-3 text-base md:text-xl text-zinc-400 max-w-sm md:max-w-2xl font-medium mt-6 leading-relaxed"
     >
-      Computer Engineering student at <span class="text-[#500000] font-semibold">Texas A&M University</span>. 
+      Computer Engineering student at <span class="text-[#38bdf8] font-semibold">Texas A&M University</span>. 
       Building full-stack applications, data pipelines, and AI-powered tools.
     </p>
     
-    <div class="animate-fadeInUp stagger-4">
-      <SocialIcons client:visible />
-    </div>
-    
-    <!-- Random Projects Section -->
-    <div class="animate-fadeInUp stagger-5 mt-16 w-full max-w-5xl px-4">
-      <h2 class="text-xl md:text-2xl font-bold text-white mb-6">
-        Featured <span class="text-[#38bdf8]">Work</span>
+    <!-- Featured Projects Section: two cards side by side -->
+    <div class="animate-fadeInUp stagger-5 mt-16 w-full max-w-6xl mx-auto px-4 min-w-0">
+      <h2
+        class="text-4xl font-bold flex flex-col items-center gap-6 text-center whitespace-nowrap text-[#38bdf8] md:flex-row md:items-center md:text-start mb-6"
+      >
+        <span>Featured Projects</span>
+        <span
+          class="hidden h-1 grow rounded-lg bg-gradient-to-r from-[#1e293b] to-[#38bdf8]/30 md:block"
+        ></span>
       </h2>
       
-      <div 
-        id="random-projects-grid"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-        data-projects={JSON.stringify(proyectos)}
-      >
-        {randomProjects.map((project) => (
-          <div class="random-project-card group flex flex-col overflow-hidden rounded-xl bg-[#1e293b]/80 backdrop-blur-sm border border-[#38bdf8]/10 transition-all duration-300 hover:border-[#38bdf8]/40 hover:shadow-xl hover:shadow-[#1e293b]/10 text-left">
-            <div class="relative overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {featuredProjects.map((featuredProject) => (
+          <a
+            href={featuredProject.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="random-project-card group flex flex-col overflow-hidden rounded-2xl bg-[#1e293b]/80 backdrop-blur-sm border border-[#38bdf8]/10 transition-all duration-300 hover:-translate-y-1 text-left block w-full"
+          >
+            <div class="relative overflow-hidden w-full">
               <img
-                src={project.imagen}
-                alt={`Project: ${project.titulo}`}
-                class="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                src={featuredProject.imagen}
+                alt={`Project: ${featuredProject.titulo}`}
+                class="w-full h-auto block object-contain bg-[#0f172a]/30"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-[#1e293b] via-transparent to-transparent opacity-60"></div>
             </div>
-            <div class="flex flex-col grow p-3">
-              <h3 class="text-sm font-bold text-white mb-1 line-clamp-1">{project.titulo}</h3>
-              <p class="text-zinc-400 text-xs leading-relaxed mb-2 line-clamp-2">{project.descripcion}</p>
-              <div class="flex flex-wrap gap-1 mb-2">
-                {project.tecnologias.slice(0, 3).map((tech) => (
-                  <span class="rounded-full bg-[#1e293b]/20 text-[#38bdf8] px-2 py-0.5 text-[10px] font-semibold">{tech}</span>
+            <div class="flex flex-col grow p-5 md:p-6">
+              <h3 class="text-xl md:text-2xl font-bold text-white mb-2">{featuredProject.titulo}</h3>
+              <p class="text-zinc-400 text-sm md:text-base leading-relaxed mb-4">{featuredProject.descripcion}</p>
+              <div class="flex flex-wrap gap-2">
+                {featuredProject.tecnologias.map((tech) => (
+                  <span class="rounded-full bg-[#1e293b]/20 text-[#38bdf8] px-3 py-1 text-xs font-semibold">{tech}</span>
                 ))}
-                {project.tecnologias.length > 3 && (
-                  <span class="rounded-full bg-[#38bdf8]/10 text-[#38bdf8]/70 px-2 py-0.5 text-[10px] font-medium">+{project.tecnologias.length - 3}</span>
-                )}
-              </div>
-              <div class="mt-auto flex gap-2">
-                <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                  class="flex-1 flex items-center justify-center gap-1 text-[#38bdf8] py-1 rounded-lg text-xs font-semibold hover:bg-[#38bdf8]/10 transition-all duration-300">
-                  Demo
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                  </svg>
-                </a>
-                <a href={project.codigo} target="_blank" rel="noopener noreferrer"
-                  class="flex-1 flex items-center justify-center gap-1 text-[#38bdf8] py-1 rounded-lg text-xs font-semibold hover:bg-[#38bdf8]/10 transition-all duration-300">
-                  Code
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                  </svg>
-                </a>
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       
       <a
-        href="/proyectos"
+        href="/projects"
         class="group inline-flex items-center gap-2 mt-6 px-5 py-2.5 border border-[#38bdf8]/30 text-[#38bdf8] font-semibold rounded-xl transition-all duration-300 hover:bg-[#38bdf8]/10 hover:border-[#38bdf8]/50"
       >
         View All Projects
@@ -99,73 +81,3 @@ const randomProjects = shuffled.slice(0, 3);
 
   </main>
 </header>
-
-<script>
-  // Client-side randomization for each page load
-  document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('random-projects-grid');
-    if (!grid) return;
-    
-    const projectsData = JSON.parse(grid.dataset.projects || '[]');
-    if (projectsData.length === 0) return;
-    
-    // Fisher-Yates shuffle
-    const shuffled = [...projectsData];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    
-    const selected = shuffled.slice(0, 3);
-    
-    // Create card HTML
-    const createCard = (project) => {
-      const techTags = project.tecnologias.slice(0, 3).map(tech => 
-        `<span class="rounded-full bg-[#1e293b]/20 text-[#38bdf8] px-2 py-0.5 text-[10px] font-semibold">${tech}</span>`
-      ).join('');
-      
-      const extraTechs = project.tecnologias.length > 3 
-        ? `<span class="rounded-full bg-[#38bdf8]/10 text-[#38bdf8]/70 px-2 py-0.5 text-[10px] font-medium">+${project.tecnologias.length - 3}</span>`
-        : '';
-      
-      return `
-        <div class="random-project-card group flex flex-col overflow-hidden rounded-xl bg-[#1e293b]/80 backdrop-blur-sm border border-[#38bdf8]/10 transition-all duration-300 hover:border-[#38bdf8]/40 hover:shadow-xl hover:shadow-[#1e293b]/10 text-left">
-          <div class="relative overflow-hidden">
-            <img
-              src="${project.imagen}"
-              alt="Project: ${project.titulo}"
-              class="h-32 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#1e293b] via-transparent to-transparent opacity-60"></div>
-          </div>
-          <div class="flex flex-col grow p-3">
-            <h3 class="text-sm font-bold text-white mb-1 line-clamp-1">${project.titulo}</h3>
-            <p class="text-zinc-400 text-xs leading-relaxed mb-2 line-clamp-2">${project.descripcion}</p>
-            <div class="flex flex-wrap gap-1 mb-2">
-              ${techTags}${extraTechs}
-            </div>
-            <div class="mt-auto flex gap-2">
-              <a href="${project.demo}" target="_blank" rel="noopener noreferrer"
-                class="flex-1 flex items-center justify-center gap-1 text-[#38bdf8] py-1 rounded-lg text-xs font-semibold hover:bg-[#38bdf8]/10 transition-all duration-300">
-                Demo
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-              </a>
-              <a href="${project.codigo}" target="_blank" rel="noopener noreferrer"
-                class="flex-1 flex items-center justify-center gap-1 text-[#38bdf8] py-1 rounded-lg text-xs font-semibold hover:bg-[#38bdf8]/10 transition-all duration-300">
-                Code
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      `;
-    };
-    
-    grid.innerHTML = selected.map(createCard).join('');
-  });
-</script>

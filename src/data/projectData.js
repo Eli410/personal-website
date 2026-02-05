@@ -4,82 +4,62 @@ const placeholderImage = "https://placehold.co/600x400/0a0a0f/998542?text=Projec
 export const proyectos = [
   {
     titulo: "HPC Runner",
+    dateRange: "Jan 24, 2026",
+    subtitle: "2nd place overall at TAMU hack 2026 | React, Next.js, MongoDB, SLURM",
     descripcion:
       "2nd place overall at TAMU Hack 2026. Gemini-powered AI planning pipeline for SLURM job runner with auto-generated run specs, JWT auth, and IDE-like file management interface.",
-    imagen: placeholderImage + "+HPC",
+    imagen: "/images/project_hpc.png",
     tecnologias: ["React", "Next.js", "MongoDB", "SLURM"],
+    url: "https://devpost.com/software/slurmglue",
     demo: "#",
     codigo: "https://github.com/Eli410",
     categoria: "fullstack",
+    summary:
+      "Gemini-powered AI pipeline for SLURM that auto-generates run specs from code. JWT auth, MongoDB, and an IDE-like React frontend.",
   },
   {
     titulo: "Instant Karaoke",
+    role: "Full-Stack Developer",
+    dateRange: "Oct 2024 - Jan 2025",
     descripcion:
       "Full-stack karaoke web app delivering real-time stem separation with Demucs (PyTorch), chunked processing, cross-fade stitching, and lyric-synced playback with word-level highlighting.",
     imagen: placeholderImage + "+Karaoke",
     tecnologias: ["React", "Python", "PyTorch", "WebSockets"],
+    url: "https://github.com/Eli410/Instant-Karaoke",
     demo: "#",
     codigo: "https://github.com/Eli410",
     categoria: "fullstack",
+    summary:
+      "Full-stack karaoke app with Demucs stem separation, chunked processing, and lyric-synced playback with word-level highlighting.",
   },
   {
     titulo: "Aggie Class Alert",
+    role: "Full-Stack Developer",
+    dateRange: "Apr 2024 - Present",
     descripcion:
       "Discord bot using TAMU public APIs to notify students when class sections open. Real-time alerts via slash commands and interactive menus. 800+ users since Apr 2024.",
     imagen: placeholderImage + "+Discord",
     tecnologias: ["Python", "Discord.py", "REST APIs"],
+    url: "https://github.com/Eli410/AggieClassAlert",
     demo: "#",
     codigo: "https://github.com/Eli410",
     categoria: "backend",
+    summary:
+      "Discord bot that notifies students when TAMU class sections open. Slash commands and interactive menus; 800+ users.",
   },
   {
     titulo: "Maroon Rides",
+    role: "React Native Development: Timetable & Bottom Sheet Interface",
+    dateRange: "Oct 2023 - Apr 2024",
     descripcion:
       "React Native app showing real-time TAMU bus info with 20,000+ downloads. Features real-time API fetching, AsyncStorage caching, bottom sheet route picker, and responsive timetable.",
-    imagen: placeholderImage + "+Mobile",
+    imagen: "/images/maroon-rides.png",
     tecnologias: ["React Native", "TypeScript", "REST APIs"],
+    url: "https://github.com/Maroon-Rides/MaroonRides",
     demo: "#",
     codigo: "https://github.com/Eli410",
     categoria: "fullstack",
-  },
-  {
-    titulo: "LASER - Sea Level Prediction",
-    descripcion:
-      "1st place at TAMIDS 2024 Data Competition. LSTM model predicting Florida coastal sea level rise using 120,130 NOAA data points, matching research predictions.",
-    imagen: placeholderImage + "+ML",
-    tecnologias: ["Python", "TensorFlow", "LSTM", "Data Viz"],
-    demo: "#",
-    codigo: "https://github.com/Eli410",
-    categoria: "backend",
-  },
-  {
-    titulo: "Azure Data Analytics Dashboard",
-    descripcion:
-      "Enterprise-grade Azure Data Explorer dashboard for historic data analysis across Application Insights with cross-subscription visualization.",
-    imagen: placeholderImage + "+Azure",
-    tecnologias: ["Azure", "Python", "Kusto", "Data Viz"],
-    demo: "#",
-    codigo: "https://github.com/Eli410",
-    categoria: "fullstack",
-  },
-  {
-    titulo: "Smoke Composition Predictor",
-    descripcion:
-      "LiteRT (TFLite) model achieving 95% accuracy with sub-millisecond prediction time for industrial smoke composition analysis.",
-    imagen: placeholderImage + "+TFLite",
-    tecnologias: ["Python", "TensorFlow Lite", "PyQt5"],
-    demo: "#",
-    codigo: "https://github.com/Eli410",
-    categoria: "backend",
-  },
-  {
-    titulo: "Geospatial Storm Predictor",
-    descripcion:
-      "Machine learning dataset and models for storm prediction, processing 1TB+ of historical weather data from NOAA APIs with time-series visualization.",
-    imagen: placeholderImage + "+Weather",
-    tecnologias: ["Python", "ML", "APIs", "Data Processing"],
-    demo: "#",
-    codigo: "https://github.com/Eli410",
-    categoria: "backend",
+    summary:
+      "React Native app for real-time TAMU bus info; 20k+ downloads. Real-time API, AsyncStorage, bottom sheet picker, and timetable.",
   },
 ];

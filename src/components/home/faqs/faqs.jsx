@@ -50,7 +50,7 @@ const SkillsList = () => {
       "I have experience working in agile environments, using Git for version control and tools like Jira for project management. I've contributed to projects with 20,000+ users (Maroon Rides) and built tools used by 800+ students (Aggie Class Alert).",
     ],
     "Achievements & Competitions": [
-      "I placed 2nd overall at TAMU Hack 2026 with HPC Runner, an AI-powered SLURM job runner. I also won 1st place at the TAMIDS 2024 Data Competition with LASER, a sea level prediction model using LSTM on NOAA data.",
+      "I placed 2nd overall at TAMU Hack 2026 with HPC Runner, an AI-powered SLURM job runner.",
     ],
   };
 

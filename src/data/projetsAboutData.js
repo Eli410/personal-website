@@ -3,31 +3,27 @@ const placeholderImage = "https://placehold.co/600x400/0a0a0f/998542?text=Projec
 
 export const proyectos = [
   {
-    titulo: "HPC Runner",
-    imagen: placeholderImage + "+HPC",
-    tecnologias: ["React", "Next.js", "MongoDB", "SLURM"],
-    demo: "#",
-    codigo: "https://github.com/Eli410",
-  },
-  {
     titulo: "Instant Karaoke",
     imagen: placeholderImage + "+Karaoke",
     tecnologias: ["React", "Python", "PyTorch", "WebSockets"],
-    demo: "#",
-    codigo: "https://github.com/Eli410",
+    url: "https://github.com/Eli410/Instant-Karaoke",
   },
   {
     titulo: "Aggie Class Alert",
     imagen: placeholderImage + "+Discord",
     tecnologias: ["Python", "Discord.py", "REST APIs"],
-    demo: "#",
-    codigo: "https://github.com/Eli410",
+    url: "https://github.com/Eli410/AggieClassAlert",
   },
   {
     titulo: "Maroon Rides",
-    imagen: placeholderImage + "+Mobile",
+    imagen: "/images/maroon-rides.png",
     tecnologias: ["React Native", "TypeScript", "REST APIs"],
-    demo: "#",
-    codigo: "https://github.com/Eli410",
+    url: "https://github.com/Maroon-Rides/MaroonRides",
+  },
+  {
+    titulo: "HPC Runner",
+    imagen: "/images/project_hpc.png",
+    tecnologias: ["React", "Next.js", "MongoDB", "SLURM"],
+    url: "https://devpost.com/software/slurmglue",
   },
 ];

@@ -10,7 +10,6 @@ const TypewriterComponent = () => {
             "Software Engineer",
             "Full-Stack Developer", 
             "Data Engineer",
-            "React & Python Builder",
           ],
           autoStart: true,
           loop: true,

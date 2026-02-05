@@ -1,73 +1,63 @@
 ---
-import { HiArrowRight } from "react-icons/hi";
-
 export interface Props {
   titulo: string;
   descripcion: string;
   imagen: string;
   tecnologias: string[];
+  url?: string;
   demo: string;
   codigo: string;
   categoria?: string;
-  index: number; 
+  index: number;
+  role?: string;
+  dateRange?: string;
+  subtitle?: string;
+  summary?: string;
 }
 
-const { titulo, descripcion, imagen, tecnologias, demo, codigo, categoria, index } =
+const { titulo, imagen, tecnologias, url: urlProp, demo, codigo, categoria, index, dateRange, summary } =
   Astro.props;
+const url = urlProp ?? demo ?? codigo;
 ---
 
 <div
   data-index={index}
   data-categoria={categoria ?? ""}
-  class="project-card z-10 flex w-[400px] flex-col overflow-hidden rounded-xl bg-[#1e293b] border border-[#38bdf8]/10 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-[#38bdf8]/30 lg:w-[320px]"
+  class="project-card flex w-full max-w-md flex-col"
 >
-  <img
-    src={imagen}
-    alt={`Project image: ${titulo}`}
-    class="h-50 w-full rounded-xl object-cover p-3"
-    loading="lazy"
-  />
-  <div class="flex grow flex-col px-4 pb-4">
-    <h3 class="text-xl font-semibold text-white">{titulo}</h3>
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group flex w-full max-w-md mx-auto flex-col overflow-hidden rounded-xl bg-[#1e293b] border border-[#38bdf8]/10 transition-all duration-300 hover:scale-[1.02] hover:border-[#38bdf8]/30 block"
+  >
+    <img
+      src={imagen}
+      alt={`Project: ${titulo}`}
+      class="w-full h-auto max-h-72 object-contain rounded-t-xl"
+      loading="lazy"
+    />
 
-    <div class="my-2 flex flex-wrap gap-2">
-      {
-        tecnologias.map((tech) => (
-          <span class="rounded-md bg-[#1e293b]/20 text-[#38bdf8] px-2 py-0.5 text-xs font-semibold">
-            {tech}
-          </span>
-        ))
-      }
+    <div class="flex flex-col grow p-4">
+      <h3 class="text-lg font-semibold mb-2 text-white">{titulo}</h3>
+
+      {summary && (
+        <p class="text-zinc-400 text-sm leading-relaxed mb-3">{summary}</p>
+      )}
+
+      <div class="flex flex-wrap gap-2">
+        {
+          tecnologias.map((tech) => (
+            <span class="rounded-md bg-[#1e293b]/20 text-[#38bdf8] px-2 py-0.5 text-xs font-semibold">
+              {tech}
+            </span>
+          ))
+        }
+      </div>
+
+      {dateRange && (
+        <p class="mt-auto pt-3 text-right text-zinc-500 text-xs">{dateRange}</p>
+      )}
     </div>
-
-    <p class="flex grow text-zinc-400 text-sm leading-relaxed">{descripcion}</p>
-
-    <div class="mt-auto flex justify-between pt-4">
-      <a
-        class="group text-[#38bdf8] hover:text-[#7dd3fc] flex items-center justify-start p-0 font-semibold text-base transition-colors"
-        target="_blank"
-        rel="noopener noreferrer"
-        href={demo}
-      >
-        Demo
-        <HiArrowRight
-          className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
-          size={16}
-        />
-      </a>
-
-      <a
-        class="group text-[#38bdf8] hover:text-[#7dd3fc] flex items-center justify-start p-0 font-semibold text-base transition-colors"
-        href={codigo}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Code
-        <HiArrowRight
-          className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
-          size={16}
-        />
-      </a>
-    </div>
-  </div>
+  </a>
 </div>

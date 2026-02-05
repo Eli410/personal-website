@@ -1,39 +1,44 @@
 import React, { useState } from "react";
-import { FaRegCopy, FaCheck } from "react-icons/fa";
 
-export default function EmailCopy() {
-  const [copied, setCopied] = useState(false);
-  const email = "ziyangc410@gmail.com";
+const RECIPIENT = "ziyangc410@gmail.com";
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
+export default function ContactForm() {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(title);
+    const bodyEncoded = encodeURIComponent(body);
+    const mailto = `mailto:${RECIPIENT}?subject=${subject}&body=${bodyEncoded}`;
+    window.open(mailto, "_blank");
   };
 
   return (
-    <div className="m-6 flex items-center gap-3">
-      <h1 className="text-lg font-medium text-zinc-300">{email}</h1>
+    <form
+      onSubmit={handleSend}
+      className="m-6 flex w-full max-w-md flex-col gap-4"
+    >
+      <input
+        type="text"
+        placeholder="Subject"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="rounded-lg border border-[#38bdf8]/30 bg-[#1e293b] px-4 py-3 text-gray-300 placeholder-gray-500 outline-none transition focus:border-[#38bdf8]/60 focus:ring-1 focus:ring-[#38bdf8]/40"
+      />
+      <textarea
+        placeholder="Message"
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+        rows={4}
+        className="rounded-lg border border-[#38bdf8]/30 bg-[#1e293b] px-4 py-3 text-gray-300 placeholder-gray-500 outline-none transition focus:border-[#38bdf8]/60 focus:ring-1 focus:ring-[#38bdf8]/40 resize-none"
+      />
       <button
-        onClick={copyToClipboard}
-        className="flex items-center gap-2 cursor-pointer font-semibold rounded-lg border-none px-3 py-2 text-sm bg-[#1e293b] hover:bg-[#334155] text-white transition-all duration-300 shadow-lg shadow-[#1e293b]/20"
+        type="submit"
+        className="cursor-pointer rounded-lg border-none bg-[#1e293b] px-4 py-3 font-semibold text-white shadow-lg shadow-[#1e293b]/20 transition-all duration-300 hover:bg-[#334155]"
       >
-        {copied ? (
-          <>
-            <FaCheck className="text-[#7dd3fc]" />
-            Copied!
-          </>
-        ) : (
-          <>
-            <FaRegCopy className="text-zinc-300" />
-            Copy
-          </>
-        )}
+        Send email
       </button>
-    </div>
+    </form>
   );
 }

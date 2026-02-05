@@ -1,24 +1,31 @@
 ---
-// Placeholder for profile photo
 ---
 
-<!-- Main container -->
-<div
-  class="mx-auto mt-20 flex max-w-6xl flex-col items-center gap-8 px-6 lg:flex-row"
->
-  <!-- Profile placeholder image -->
+<section class="site-container mt-14 mx-auto max-w-6xl px-4">
+  <div class="site-container mt-14">
+    <h2
+      class="text-4xl font-bold flex flex-col items-center gap-6 text-center whitespace-nowrap text-white md:flex-row md:items-center md:text-start"
+    >
+      <span class="text-[#38bdf8]">About Me</span>
+      <span
+        class="hidden h-1 grow rounded-lg bg-gradient-to-r from-[#1e293b] to-[#38bdf8]/30 md:block"
+      ></span>
+    </h2>
+  </div>
+  <!-- Main container -->
   <div
-    class="h-64 w-64 overflow-hidden rounded-2xl shadow-lg md:h-96 md:w-96 bg-[#1e293b] border border-[#38bdf8]/10"
+    class="mx-auto mt-10 flex max-w-6xl flex-col items-center gap-8 px-6 lg:flex-row"
   >
-    <div class="h-full w-full flex items-center justify-center bg-gradient-to-br from-[#1e293b]/20 to-[#38bdf8]/10">
-      <div class="text-center">
-        <div class="w-32 h-32 mx-auto rounded-full bg-[#1e293b]/30 flex items-center justify-center mb-4">
-          <span class="text-5xl font-bold text-[#38bdf8]">EC</span>
-        </div>
-        <p class="text-zinc-400 text-lg font-medium">Eli Chen</p>
-        <p class="text-zinc-500 text-sm">Software Engineer</p>
-      </div>
-    </div>
+  <!-- Profile photo -->
+  <div
+    class="h-64 w-64 shrink-0 overflow-hidden rounded-2xl shadow-lg md:h-96 md:w-96 bg-[#1e293b] border border-[#38bdf8]/10"
+  >
+    <img
+      src="/images/me.jpg"
+      alt="Eli Chen"
+      class="h-full w-full object-cover"
+      loading="lazy"
+    />
   </div>
 
   <!-- Text content -->
@@ -42,13 +49,10 @@
       I've also worked as a research assistant at Texas A&M's Innovation Lab, building ML models for storm prediction.
     </p>
     <p class="mt-3 leading-relaxed">
-      Outside of work, I love participating in hackathons—I placed 
-      <span class="text-[#7dd3fc] font-semibold">2nd overall at TAMU Hack 2026</span> and 
-      <span class="text-[#7dd3fc] font-semibold">1st at the TAMIDS 2024 Data Competition</span>. 
-      I'm always excited to learn new technologies and take on challenging projects.
-    </p>
-    <p class="mt-3 leading-relaxed">
-      <span class="text-[#7dd3fc] font-semibold">No sponsorship required</span> to work in the US.
+      Outside of work, I play both <span class="text-[#38bdf8] font-semibold">acoustic and electric guitar</span>,
+      love building and flying <span class="text-[#38bdf8] font-semibold">FPV drones</span>,
+      and enjoy <span class="text-[#38bdf8] font-semibold">retro gaming and gaming in general</span>.
     </p>
   </div>
-</div>
+  </div>
+</section>

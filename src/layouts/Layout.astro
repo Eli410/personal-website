@@ -12,7 +12,7 @@ const pageDescription = description || "Software Engineer & Computer Engineering
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -24,10 +24,9 @@ const pageDescription = description || "Software Engineer & Computer Engineering
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <title>{pageTitle}</title>
   </head>
-  <body class="bg-gray-950 text-white font-outfit">
-    <!-- Animated background base -->
-    <div class="animated-bg"></div>
+  <body class="text-white font-outfit">
     <Navbar />
     <slot />
+    <script src="../scripts/lenis.js"></script>
   </body>
 </html>

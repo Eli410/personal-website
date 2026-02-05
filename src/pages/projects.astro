@@ -9,26 +9,10 @@ import { proyectos } from "../data/projectData.js";
 <Layout title="Projects" description="Explore my projects and work">
   <Hero titulo="Projects" />
 
-  <!-- Filter buttons -->
-  <div class="mt-6 mb-6 flex flex-wrap justify-center gap-3 px-2">
-    <button class="filter-btn cursor-pointer rounded-full bg-[#38bdf8] px-5 py-1.5 text-sm font-bold text-[#0f172a] transition-all duration-150 active:translate-y-0.5" data-filter="all">
-      All
-    </button>
-    <button class="filter-btn cursor-pointer rounded-full bg-[#38bdf8] px-5 py-1.5 text-sm font-bold text-[#0f172a] transition-all duration-150 active:translate-y-0.5" data-filter="fullstack">
-      Full Stack
-    </button>
-    <button class="filter-btn cursor-pointer rounded-full bg-[#38bdf8] px-5 py-1.5 text-sm font-bold text-[#0f172a] transition-all duration-150 active:translate-y-0.5" data-filter="frontend">
-      Frontend
-    </button>
-    <button class="filter-btn cursor-pointer rounded-full bg-[#38bdf8] px-5 py-1.5 text-sm font-bold text-[#0f172a] transition-all duration-150 active:translate-y-0.5" data-filter="backend">
-      Backend
-    </button>
-  </div>
-
-  <!-- Cards -->
+  <!-- Cards: 1 column on small screens, max 2 columns on larger -->
   <div
     id="projects-container"
-    class="4xl:px-96 flex flex-wrap justify-center gap-5 px-3 pt-5 xl:px-32 2xl:px-60"
+    class="animate-fadeInUp stagger-2 grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[930px] mx-auto px-3 pt-5 justify-items-center"
   >
     {
       proyectos.map((proyecto, index) => (
@@ -38,16 +22,21 @@ import { proyectos } from "../data/projectData.js";
           descripcion={proyecto.descripcion}
           imagen={proyecto.imagen}
           tecnologias={proyecto.tecnologias}
+          url={proyecto.url}
           demo={proyecto.demo}
           codigo={proyecto.codigo}
           categoria={proyecto.categoria}
+          role={proyecto.role}
+          dateRange={proyecto.dateRange}
+          subtitle={proyecto.subtitle}
+          summary={proyecto.summary}
         />
       ))
     }
   </div>
 
   <!-- Load more button -->
-  <div class="flex justify-center mt-8">
+  <div class="animate-fadeInUp stagger-3 flex justify-center mt-8">
     <button
       id="load-more"
       class="px-6 py-2 cursor-pointer bg-[#38bdf8] text-[#0f172a] font-bold rounded-full hover:bg-[#60a5fa] active:translate-y-0.5 transition-all"

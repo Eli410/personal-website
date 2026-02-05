@@ -1,10 +1,14 @@
+.experience {
+  background: transparent;
+}
+
 .experience h2 {
   display: flex;
   gap: 24px;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
-  color: #fff;
+  color: #38bdf8;
 }
 
 @media (min-width: 768px) {
@@ -31,6 +35,11 @@
   flex-direction: row;
   overflow-x: auto;
   position: relative;
+  scroll-behavior: smooth;
+}
+
+.job-title-indicator {
+  display: none;
 }
 
 @media (min-width: 768px) {
@@ -39,16 +48,19 @@
     align-items: flex-start;
     padding-left: 16px;
   }
-  .job-title button.active::before {
-    content: "";
+  .job-title-indicator {
+    display: block;
     position: absolute;
-    left: -16px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 0;
     width: 4px;
-    height: 70%;
     background: linear-gradient(180deg, #1e293b, #38bdf8);
     border-radius: 4px;
+    transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+  .job-title button.active::before {
+    content: none;
   }
 }
 
@@ -76,6 +88,8 @@
 
 .jobs-descriptions {
   flex: 1;
+  /* Reserve space for the tallest tab so switching tabs doesn't shift layout */
+  min-height: 20rem;
 }
 
 .description {

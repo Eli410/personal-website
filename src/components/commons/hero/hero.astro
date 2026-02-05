@@ -7,16 +7,14 @@ const { titulo } = Astro.props;
 ---
 
 <section
-  class="relative text-white py-24 mt-[72px] overflow-visible
-  bg-[linear-gradient(rgba(153,133,66,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(153,133,66,0.03)_1px,transparent_1px)]
-  bg-[size:50px_50px]"
+  class="relative text-white py-24 mt-[72px] overflow-visible"
 >
   <!-- Subtle gradient overlay -->
   <div class="absolute inset-0 bg-gradient-to-b from-[#1e293b]/5 to-transparent"></div>
   
   <div class="max-w-6xl mx-auto px-6 text-center relative">
     <h1
-      class="text-4xl md:text-6xl font-bold mb-4 tracking-tight"
+      class="animate-fadeInUp stagger-1 text-4xl md:text-6xl font-bold mb-4 tracking-tight"
     >
       <span class="text-[#38bdf8]">{titulo}</span>
     </h1>
