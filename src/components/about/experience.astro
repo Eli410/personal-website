@@ -20,15 +20,26 @@ import { jobs } from "../../data/jobsData";
     <div class="job-title" data-lenis-prevent>
       <div class="job-title-indicator" aria-hidden="true"></div>
       {
-        jobs.map((job, index) => (
-          <button
-            class={`headline-3 tabbutton ${index === 0 ? "active" : ""}`}
-            aria-selected={index === 0 ? "true" : "false"}
-            data-index={index}
-          >
-            {job.title}
-          </button>
-        ))
+        jobs.map((job, index) => {
+          const company = job.title.includes(" - ") ? job.title.split(" - ").slice(1).join(" - ") : job.title;
+          return (
+            <button
+              class={`headline-3 tabbutton ${index === 0 ? "active" : ""}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              data-index={index}
+              title={company}
+            >
+              <span class="job-title-icon" aria-hidden="true">
+                <!-- Placeholder: replace with your icon (e.g. company logo) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                </svg>
+              </span>
+              <span class="job-title-text">{company}</span>
+            </button>
+          );
+        })
       }
     </div>
 
@@ -36,10 +47,10 @@ import { jobs } from "../../data/jobsData";
       {
         jobs.map(({ title, time, description, list }, index) => (
           <div
-            class={`description tabcontent ${index === 0 ? "active" : ""}`}
+            class={`description tabcontent text-left ${index === 0 ? "active" : ""}`}
             data-index={index}
           >
-            <h3 class="mb-2 text-2xl font-bold text-[#38bdf8]">{title}</h3>
+            <h3 class="mb-2 text-2xl font-bold text-[#38bdf8] text-center">{title}</h3>
             <div class="job-time">
               {time.map((t) => (
                 <time class="headline-4 text-zinc-500 mb-1" datetime={t}>
@@ -47,8 +58,8 @@ import { jobs } from "../../data/jobsData";
                 </time>
               ))}
             </div>
-            <p class="mb-3 text-zinc-300">{description}</p>
-            <ul class="marker:text-[#7dd3fc] list-disc space-y-2 pl-5 text-zinc-400">
+            <p class="mb-3 text-zinc-300 text-center">{description}</p>
+            <ul class="marker:text-[#7dd3fc] list-disc list-outside space-y-2 pl-5 text-zinc-400 text-left">
               {list.map((item) => (
                 <li>{item}</li>
               ))}

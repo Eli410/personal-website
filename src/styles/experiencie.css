@@ -24,6 +24,56 @@
   margin-top: 48px;
 }
 
+/* Small screens: icons at top of description area, horizontal layout */
+@media (max-width: 767px) {
+  .jobs {
+    position: relative;
+  }
+  .job-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
+    padding-bottom: 0px;
+    margin-bottom: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  .job-title button {
+    flex-shrink: 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .job-title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(139, 139, 139);
+  }
+  .job-title button:hover .job-title-icon,
+  .job-title button.active .job-title-icon {
+    color: #38bdf8;
+  }
+  .job-title button.active .job-title-icon {
+    color: #fff;
+  }
+  .job-title-text {
+    display: none;
+  }
+  .jobs-descriptions {
+    padding-top: 28px; /* Space for icon row */
+  }
+}
+
 @media (min-width: 768px) {
   .jobs {
     flex-direction: row;
@@ -46,6 +96,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding-left: 16px;
+    position: relative;
   }
   .job-title-indicator {
     display: block;
@@ -60,6 +111,25 @@
   }
   .job-title button.active::before {
     content: none;
+  }
+  .job-title button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .job-title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: inherit;
+  }
+  .job-title-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .job-title-text {
+    display: inline;
   }
 }
 
@@ -88,7 +158,13 @@
 .jobs-descriptions {
   flex: 1;
   /* Reserve space for the tallest tab so switching tabs doesn't shift layout */
-  min-height: 20rem;
+  min-height: 18rem;
+}
+
+@media (min-width: 768px) {
+  .jobs-descriptions {
+    padding-top: 0;
+  }
 }
 
 .description {
