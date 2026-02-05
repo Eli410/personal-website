@@ -11,6 +11,7 @@ export const proyectos = [
     imagen: "/images/project_hpc.png",
     tecnologias: ["React", "Next.js", "MongoDB", "SLURM"],
     url: "https://devpost.com/software/slurmglue",
+    github: "https://github.com/Eli410",
     demo: "#",
     codigo: "https://github.com/Eli410",
     categoria: "fullstack",

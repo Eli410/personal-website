@@ -2,40 +2,34 @@
 import "../styles/projects.css";
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/commons/hero/hero.astro";
-import ProjectCard from "../components/project/proyectCard.astro";
+import ProjectSection from "../components/project/ProjectSection.astro";
 import { proyectos } from "../data/projectData.js";
 ---
 
 <Layout title="Projects" description="Explore my projects and work">
   <Hero titulo="Projects" />
 
-  <!-- Cards: 1 column on small screens, max 2 columns on larger -->
-  <div
-    id="projects-container"
-    class="animate-fadeInUp stagger-2 grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[930px] mx-auto px-3 pt-5 justify-items-center"
-  >
+  <div id="projects-container" class="pt-5 pb-12">
     {
       proyectos.map((proyecto, index) => (
-        <ProjectCard
+        <ProjectSection
           index={index}
           titulo={proyecto.titulo}
           descripcion={proyecto.descripcion}
           imagen={proyecto.imagen}
           tecnologias={proyecto.tecnologias}
           url={proyecto.url}
-          demo={proyecto.demo}
-          codigo={proyecto.codigo}
+          github={proyecto.github}
           categoria={proyecto.categoria}
           role={proyecto.role}
           dateRange={proyecto.dateRange}
           subtitle={proyecto.subtitle}
-          summary={proyecto.summary}
         />
       ))
     }
   </div>
 
-  <!-- Load more button -->
+  <!-- Load more button (for filter + show more) -->
   <div class="animate-fadeInUp stagger-3 flex justify-center mt-8">
     <button
       id="load-more"
@@ -69,7 +63,7 @@ import { proyectos } from "../data/projectData.js";
   }
 
   function showCard(card) {
-    card.style.display = "flex";
+    card.style.display = "block";
     requestAnimationFrame(() => {
       card.classList.remove(HIDDEN_CLASS);
       card.classList.add(VISIBLE_CLASS);
