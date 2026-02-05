@@ -1,6 +1,7 @@
 export const jobs = [
   {
     title: "Data Engineer Intern - Hexagon ALI",
+    logo: "hexagon",
     time: ["May 2025 - Dec 2025"],
     description:
       "Building data visualization and analytics infrastructure for enterprise software monitoring.",
@@ -12,6 +13,7 @@ export const jobs = [
   },
   {
     title: "Quantitative Research Intern - Shepherd Ventures",
+    logo: "shepherd",
     time: ["Feb 2025 - Sep 2025"],
     description: "Part-time role developing quantitative trading strategies and risk analysis tools.",
     list: [
@@ -22,6 +24,7 @@ export const jobs = [
   },
   {
     title: "Software Engineer Intern - Suntop Technology",
+    logo: null,
     time: ["Jun 2024 - Aug 2024"],
     description: "Developed data analysis tools and machine learning models for industrial applications.",
     list: [
@@ -31,6 +34,7 @@ export const jobs = [
   },
   {
     title: "Research Assistant - Texas A&M Innovation Lab",
+    logo: "tamu",
     time: ["Jan 2023 - Aug 2023"],
     description:
       "Development of Intelligent Geospatial Digital Twin for storm prediction.",

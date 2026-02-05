@@ -59,9 +59,10 @@
     justify-content: center;
     color: rgb(139, 139, 139);
   }
-  .job-title button:hover .job-title-icon,
-  .job-title button.active .job-title-icon {
-    color: #38bdf8;
+  .job-title-icon .job-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
   }
   .job-title button.active .job-title-icon {
     color: #fff;
@@ -85,29 +86,40 @@
   flex-direction: row;
   overflow-x: auto;
   position: relative;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .job-title-indicator {
   display: none;
 }
 
+/* Sliding box around the active job icon – mobile only; desktop uses the sidebar */
+.job-title-icon-box {
+  position: absolute;
+  border: 2px solid #38bdf8;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease;
+  box-sizing: border-box;
+}
+
 @media (min-width: 768px) {
   .job-title {
     flex-direction: column;
     align-items: flex-start;
-    padding-left: 16px;
+    padding-left: 0;
     position: relative;
+    overflow-x: hidden; /* prevent brief horizontal scrollbar when switching from longest job title */
   }
   .job-title-indicator {
-    display: block;
-    position: absolute;
-    left: 0;
-    width: 4px;
-    background: linear-gradient(180deg, #1e293b, #38bdf8);
-    border-radius: 4px;
-    transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-      height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
+    display: none;
   }
   .job-title button.active::before {
     content: none;
@@ -124,9 +136,13 @@
     flex-shrink: 0;
     color: inherit;
   }
-  .job-title-icon svg {
+  .job-title-icon svg,
+  .job-title-icon .job-logo {
     width: 20px;
     height: 20px;
+  }
+  .job-title-icon .job-logo {
+    object-fit: contain;
   }
   .job-title-text {
     display: inline;
@@ -146,8 +162,18 @@
   transition: color 0.3s ease;
 }
 
-.job-title button:hover {
-  color: #38bdf8;
+.job-title-icon {
+  position: relative;
+}
+
+.job-title button:hover:not(.active)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(56, 189, 248, 0.2);
+  border-radius: 8px;
+  pointer-events: none;
+  transition: border-color 0.2s ease;
 }
 
 .job-title button.active {
@@ -157,8 +183,25 @@
 
 .jobs-descriptions {
   flex: 1;
-  /* Reserve space for the tallest tab so switching tabs doesn't shift layout */
+  /* Fixed height so toggling tabs never pushes Featured Projects; long content scrolls */
+  height: 18rem;
   min-height: 18rem;
+  max-height: 18rem;
+  overflow-y: auto;
+}
+
+/* On narrow viewports, use vertical space below instead of forcing a scrollbar */
+@media (max-width: 767px) {
+  .jobs-descriptions {
+    height: auto;
+    min-height: 18rem;
+    max-height: min(70vh, 32rem);
+    overflow-y: auto;
+  }
+  /* Hide scrollbar during bullet reveal to prevent flash */
+  .jobs-descriptions.content-revealing {
+    overflow-y: hidden;
+  }
 }
 
 @media (min-width: 768px) {
@@ -199,5 +242,22 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+/* Staggered bullet list: each item appears one after another */
+.bullet-list .bullet-item {
+  opacity: 0;
+  animation: bulletReveal 0.4s ease forwards;
+}
+
+@keyframes bulletReveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

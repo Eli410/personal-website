@@ -4,24 +4,24 @@ import Experience from "../../about/experience.astro";
 ---
 
 <header class="relative min-h-auto overflow-visible">
-  <main
-    class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-20"
-  >
-    <h1 class="animate-fadeInUp stagger-1 text-4xl md:text-7xl font-bold text-white">
-      Howdy, I'm <span class="text-[#38bdf8]">Eli Chen</span>
-    </h1>
+  <main class="relative z-10 flex flex-col items-center text-center px-4 pt-20">
+    <!-- Hero: content-sized so no extra top/bottom space -->
+    <div class="flex flex-col items-center text-center pb-8">
+      <h1 class="animate-fadeInUp stagger-1 text-4xl md:text-7xl font-bold text-white">
+        Howdy, I'm <span class="text-[#38bdf8]">Eli Chen</span>
+      </h1>
 
-    <TypeEfect client:visible staggerClass="stagger-2" />
+      <TypeEfect client:visible staggerClass="stagger-2" />
 
-    <p
-      class="animate-fadeInUp stagger-3 text-base md:text-xl text-zinc-400 max-w-sm md:max-w-2xl font-medium mt-6 leading-relaxed"
-    >
-      Computer Engineering student at <span class="text-[#38bdf8] font-semibold">Texas A&M University</span>. 
-      Building full-stack applications, data pipelines, and AI-powered tools.
-    </p>
-    
-    <!-- My Experience Section -->
+      <p
+        class="animate-fadeInUp stagger-3 text-base md:text-xl text-zinc-400 max-w-sm md:max-w-2xl font-medium mt-6 leading-relaxed"
+      >
+        Computer Engineering student at <span class="text-[#38bdf8] font-semibold">Texas A&M University</span>.
+        Building full-stack applications, data pipelines, and AI-powered tools.
+      </p>
+    </div>
+
+    <!-- My Experience Section (flows directly under hero, no forced viewport gap) -->
     <Experience />
-
   </main>
 </header>
