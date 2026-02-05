@@ -95,7 +95,6 @@
 }
 
 html {
-  scroll-behavior: smooth !important;
   background: #0f172a;
 }
 
@@ -104,6 +103,5 @@ html, body {
 }
 
 body {
-  scroll-behavior: smooth !important;
   background: transparent;
 }
