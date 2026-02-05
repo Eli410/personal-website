@@ -9,26 +9,26 @@
       ></span>
     </h2>
   </div>
-  <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+  <div class="mt-10 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
     {
       [
         { name: "Python", icon: "python" },
         { name: "Java", icon: "java" },
-        { name: "JavaScript", icon: "javascript" },
         { name: "C++", icon: "cplusplus" },
         { name: "SQL", icon: "mysql" },
+        { name: "JavaScript", icon: "javascript" },
         { name: "React", icon: "react" },
-        { name: "Next.js", icon: "nextjs" },
+        { name: "Astro", icon: "astro", src: "/svg/astro.svg" },
         { name: "Azure", icon: "azure" },
       ].map((skill) => (
-        <div class="flex flex-col items-center bg-[#1e293b] border border-[#38bdf8]/10 p-4 rounded-lg shadow-md">
+        <div class="flex flex-col items-center bg-[#1e293b] border border-[#38bdf8]/10 p-2.5 rounded-lg shadow-md">
           <img
-            src={`https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-original.svg`}
+            src={skill.src ?? `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-original.svg`}
             alt={skill.name}
-            class="w-12 h-12"
-            onerror={`this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-plain.svg'`}
+            class="w-8 h-8"
+            {...(skill.src ? {} : { onerror: `this.onerror=null; this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.icon}/${skill.icon}-plain.svg'` })}
           />
-          <p class="mt-2 text-white text-lg font-semibold">{skill.name}</p>
+          <p class="mt-1 text-white text-sm font-semibold">{skill.name}</p>
         </div>
       ))
     }
