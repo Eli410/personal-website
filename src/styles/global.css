@@ -96,12 +96,18 @@
 
 html {
   background: #0f172a;
-}
-
-html, body {
   overflow-x: hidden;
+  overflow-y: auto;
+  /* Reserve space for scrollbar so layout doesn't shift and no inner scroll appears on first paint */
+  scrollbar-gutter: stable;
 }
 
 body {
+  margin: 0;
   background: transparent;
+  overflow-x: hidden;
+  overflow-y: visible;
+  position: relative;
 }
+
+

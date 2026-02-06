@@ -15,7 +15,7 @@ const pageDescription = description || "Software Engineer & Computer Engineering
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={pageDescription} />
     <meta name="generator" content={Astro.generator} />
@@ -27,5 +27,23 @@ const pageDescription = description || "Software Engineer & Computer Engineering
   <body class="text-white font-outfit">
     <Navbar />
     <slot />
+    <script is:inline>
+      (function () {
+        function clearInitialFocusAndReflow() {
+          if (document.activeElement && document.activeElement !== document.body) {
+            document.activeElement.blur();
+          }
+          requestAnimationFrame(function () {
+            void document.documentElement.offsetHeight;
+            window.scrollTo(0, 0);
+          });
+        }
+        if (document.readyState === "complete") {
+          clearInitialFocusAndReflow();
+        } else {
+          window.addEventListener("load", clearInitialFocusAndReflow);
+        }
+      })();
+    </script>
   </body>
 </html>

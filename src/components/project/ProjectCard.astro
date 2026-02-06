@@ -13,44 +13,48 @@ export interface Props {
   subtitle?: string;
 }
 
-const { titulo, descripcion, imagen, tecnologias, url, github, dateRange } =
+const { titulo, descripcion, imagen, tecnologias, url, github, categoria, index, dateRange } =
   Astro.props;
 const githubUrl = github ?? (url?.includes("github.com") ? url : null);
 const externalUrl = url && url !== githubUrl ? url : null;
 ---
 
-<section class="project-section">
-  <div class="project-section__inner">
-    <div class="project-section__media">
+<article
+  data-index={index}
+  data-categoria={categoria ?? ""}
+  class="project-card"
+>
+  <div class="project-card__inner">
+    <div class="project-card__media">
       <img
         src={imagen}
         alt={`Project: ${titulo}`}
-        class="project-section__image"
+        class="project-card__image"
         loading="lazy"
       />
     </div>
-    <div class="project-section__content">
-      <h2 class="project-section__title">{titulo}</h2>
+    <div class="project-card__body">
+      <h2 class="project-card__title">{titulo}</h2>
       {dateRange && (
-        <p class="project-section__date">{dateRange}</p>
+        <p class="project-card__date">{dateRange}</p>
       )}
-      <div class="project-section__tech">
+      <div class="project-card__tech">
         {
           tecnologias.map((tech) => (
-            <span class="project-section__tech-tag">{tech}</span>
+            <span class="project-card__tech-tag">{tech}</span>
           ))
         }
       </div>
-      <p class="project-section__description">{descripcion}</p>
-      <div class="project-section__actions">
+      <p class="project-card__description">{descripcion}</p>
+      <div class="project-card__actions">
         {githubUrl && (
           <a
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="project-section__btn project-section__btn--github"
+            class="project-card__btn project-card__btn--github"
           >
-            <img src="/icons/github.svg" alt="" class="project-section__btn-icon" width="20" height="20" />
+            <img src="/icons/github.svg" alt="" class="project-card__btn-icon" width="18" height="18" />
             GitHub
           </a>
         )}
@@ -59,7 +63,7 @@ const externalUrl = url && url !== githubUrl ? url : null;
             href={externalUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="project-section__btn project-section__btn--outline"
+            class="project-card__btn project-card__btn--outline"
           >
             View project
           </a>
@@ -67,4 +71,4 @@ const externalUrl = url && url !== githubUrl ? url : null;
       </div>
     </div>
   </div>
-</section>
+</article>

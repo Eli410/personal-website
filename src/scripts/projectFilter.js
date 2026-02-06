@@ -5,11 +5,10 @@
   const HIDE_TIMEOUT = 300;
 
   function initProjectFilter() {
-    const container = document.getElementById("projects-container");
     const buttons = Array.from(document.querySelectorAll(".filter-btn"));
-    if (!container || !buttons.length) return;
+    if (!buttons.length) return;
 
-    const cards = Array.from(container.querySelectorAll("[data-categoria]"));
+    const cards = Array.from(document.querySelectorAll("[data-index][data-categoria]"));
     if (!cards.length) return;
 
     function showCard(card) {

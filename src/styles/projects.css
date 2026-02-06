@@ -1,60 +1,21 @@
-@keyframes gradientLava {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 100%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 0%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* ---- Page layout ---- */
+.projects-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
 }
 
-/* Card animation */
-.project-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition: opacity 0.28s ease, transform 0.28s ease;
-  pointer-events: auto;
-}
-
-.project-hidden {
-  opacity: 0;
-  transform: translateY(8px) scale(0.98);
-  transition: opacity 0.28s ease, transform 0.28s ease;
-  pointer-events: none;
-}
-
-/* Inactive filter buttons */
-.filter-btn {
-  opacity: 0.5;
-  transition: all 0.2s ease;
-}
-
-.filter-btn:hover {
-  opacity: 0.8;
-}
-
-/* Active button */
-.filter-btn.active {
-  transform: scale(1.05);
-  opacity: 1;
-  box-shadow: 0 4px 12px rgba(80, 0, 0, 0.3);
-}
-
-/* Project sections (no cards) */
+/* ---- Project section ---- */
 .project-section {
   width: 100%;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 0.75rem;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.project-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .project-section:last-child .project-section__inner {
@@ -72,7 +33,7 @@
 
 @media (min-width: 768px) {
   .project-section__inner {
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 1.4fr 1fr;
     gap: 2rem;
     align-items: start;
   }
@@ -88,14 +49,15 @@
 .project-section__image {
   width: 100%;
   height: auto;
-  max-height: 220px;
+  max-height: 260px;
   object-fit: cover;
   display: block;
 }
 
 @media (min-width: 768px) {
   .project-section__image {
-    max-height: 200px;
+    max-height: 340px;
+    min-height: 280px;
   }
 }
 
