@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import meImage from "../../assets/me.jpg";
 ---
 
 <section class="site-container mt-14 mx-auto max-w-6xl px-4">
@@ -16,13 +18,17 @@
   <div
     class="mx-auto mt-10 flex max-w-6xl flex-col items-center gap-8 px-6 lg:flex-row"
   >
-  <!-- Profile photo -->
+  <!-- Profile photo: responsive srcset + modern format (WebP/AVIF) at build -->
   <div
     class="h-64 w-64 shrink-0 overflow-hidden rounded-2xl shadow-lg md:h-96 md:w-96 bg-[#1e293b] border border-[#38bdf8]/10"
   >
-    <img
-      src="/images/me.jpg"
+    <Image
+      src={meImage}
       alt="Eli Chen"
+      width={384}
+      height={384}
+      widths={[256, 384, 512, 768]}
+      sizes="(min-width: 768px) 384px, 256px"
       class="h-full w-full object-cover"
       loading="lazy"
     />
