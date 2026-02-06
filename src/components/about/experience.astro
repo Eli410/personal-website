@@ -25,16 +25,22 @@ import { jobs } from "../../data/jobsData";
   </h2>
 
   <section class="jobs">
-    <div class="job-title" data-lenis-prevent>
+    <div class="job-title" data-lenis-prevent role="tablist">
       <div class="job-title-indicator" aria-hidden="true"></div>
       <div class="job-title-icon-box" aria-hidden="true"></div>
       {
         jobs.map((job, index) => {
           const company = job.title.includes(" - ") ? job.title.split(" - ").slice(1).join(" - ") : job.title;
+          const tabId = `experience-tab-${index}`;
+          const panelId = `experience-tabpanel-${index}`;
           return (
             <button
+              type="button"
               class={`headline-3 tabbutton ${index === 0 ? "active" : ""}`}
+              role="tab"
               aria-selected={index === 0 ? "true" : "false"}
+              aria-controls={panelId}
+              id={tabId}
               data-index={index}
               title={company}
             >
@@ -60,6 +66,9 @@ import { jobs } from "../../data/jobsData";
         jobs.map(({ title, time, description, list }, index) => (
           <div
             class={`description tabcontent text-left ${index === 0 ? "active" : ""}`}
+            role="tabpanel"
+            id={`experience-tabpanel-${index}`}
+            aria-labelledby={`experience-tab-${index}`}
             data-index={index}
           >
             <h3 class="mb-2 text-2xl font-bold text-[#38bdf8] text-center">{title}</h3>

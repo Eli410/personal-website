@@ -32,7 +32,10 @@ export function initExperienceTabs() {
 
   function setActiveTab(button) {
     const index = button.getAttribute("data-index");
-    tabButtons.forEach((btn) => btn.classList.remove("active"));
+    tabButtons.forEach((btn) => {
+      btn.classList.remove("active");
+      btn.setAttribute("aria-selected", btn === button ? "true" : "false");
+    });
     tabContents.forEach((content) => content.classList.remove("active"));
     button.classList.add("active");
     const content = document.querySelector(
