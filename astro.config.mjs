@@ -11,4 +11,9 @@ export default defineConfig({
   },
 
   integrations: [react()],
+
+  // Inline CSS to remove render-blocking request (PageSpeed)
+  build: {
+    inlineStylesheets: "always",
+  },
 });

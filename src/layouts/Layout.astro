@@ -9,6 +9,7 @@ export interface Props {
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} | Eli Chen` : "Eli Chen | Software Engineer";
 const pageDescription = description || "Software Engineer & Computer Engineering student at Texas A&M University. Building full-stack applications, data pipelines, and AI-powered tools.";
+const fontUrl = "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap";
 ---
 
 <!doctype html>
@@ -21,7 +22,23 @@ const pageDescription = description || "Software Engineer & Computer Engineering
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <!-- Load Google Fonts via script: no stylesheet in initial HTML; link uses media=print so fetch is non-blocking -->
+    <script is:inline define:vars={{ fontUrl }}>
+      (function(u) {
+        var l = document.createElement('link');
+        l.rel = 'stylesheet';
+        l.href = u;
+        l.media = 'print';
+        l.onload = function() { this.media = 'all'; };
+        document.head.appendChild(l);
+      })(fontUrl);
+    </script>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      />
+    </noscript>
     <title>{pageTitle}</title>
   </head>
   <body class="text-white font-outfit">
