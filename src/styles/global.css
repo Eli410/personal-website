@@ -95,11 +95,13 @@
 }
 
 html {
-  background: #0f172a;
+  background: #000000;
   overflow-x: hidden;
   overflow-y: auto;
   /* Reserve space for scrollbar so layout doesn't shift and no inner scroll appears on first paint */
   scrollbar-gutter: stable;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
@@ -108,6 +110,84 @@ body {
   overflow-x: hidden;
   overflow-y: visible;
   position: relative;
+  min-height: 100vh;
+  padding-bottom: 100px; /* Allow natural overscroll to reveal bottom text */
 }
 
+/* Body background – stops above green strip so main page is shorter by green-page-extra height */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 70px;
+  background: #0f172a;
+  z-index: -5;
+  pointer-events: none;
+}
+
+/* Green page only: just enough to show overscroll-bottom content (50px block + 20px padding).
+   Background transparent so only html green shows (avoids redundant extra color layer). */
+.green-page-extra {
+  height: 70px;
+  min-height: 70px;
+  background: transparent;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+main {
+  position: relative;
+  width: 100%;
+}
+
+/* Overscroll text - naturally visible in overscroll area */
+.overscroll-text {
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+  font-weight: 300;
+  z-index: -1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  background: #000000;
+}
+
+.overscroll-top {
+  top: 0;
+  padding-top: 20px;
+}
+
+.overscroll-bottom {
+  /* Fixed to overscroll background layer - doesn't scroll; below body::before so hidden until overscroll */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 8px;
+  z-index: -6;
+}
+
+.overscroll-bottom p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+}
+
+.overscroll-bottom img {
+  opacity: 0.4;
+}
+
+body {
+  position: relative;
+  z-index: 0;
+}
 

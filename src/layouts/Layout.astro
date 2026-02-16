@@ -26,7 +26,28 @@ const pageDescription = description || "Software Engineer & Computer Engineering
   </head>
   <body class="text-white font-outfit">
     <Navbar />
-    <slot />
+    <main>
+      <slot />
+    </main>
+    
+    <!-- Overscroll text - positioned outside body bounds to appear in HTML's black background -->
+    <div id="overscroll-top" class="overscroll-text overscroll-top">
+      <p>Keep scrolling...</p>
+    </div>
+    <!-- Overscroll bottom text - positioned below body content -->
+    <div id="overscroll-bottom" class="overscroll-text overscroll-bottom">
+      <div class="flex flex-col items-center gap-2">
+        <p>&copy; {new Date().getFullYear()} Eli Chen. All rights reserved.</p>
+        <p class="inline-flex items-center justify-center gap-2">
+          Made with Astro
+          <img src="/svg/astro.svg" alt="Astro" class="h-5 w-5 inline-block" />
+        </p>
+      </div>
+    </div>
+
+    <!-- Green page only: fixed 100px height, independent of main page -->
+    <div class="green-page-extra" aria-hidden="true"></div>
+    
     <script is:inline>
       (function () {
         function clearInitialFocusAndReflow() {
@@ -43,6 +64,85 @@ const pageDescription = description || "Software Engineer & Computer Engineering
         } else {
           window.addEventListener("load", clearInitialFocusAndReflow);
         }
+      })();
+      
+      // Overscroll text visibility handler (top only - bottom is naturally visible)
+      (function() {
+        // Track overscroll state via touch/wheel events
+        let overscrollTopAmount = 0;
+        let isDragging = false;
+        
+        function updateOverscrollText() {
+          const overscrollTop = document.getElementById('overscroll-top');
+          
+          if (overscrollTop) {
+            const opacity = overscrollTopAmount > 0 ? Math.min(1, overscrollTopAmount / 150) : '0';
+            overscrollTop.style.opacity = opacity;
+          }
+        }
+        
+        // Detect overscroll via touch events (mobile)
+        let touchStartY = 0;
+        document.addEventListener('touchstart', (e) => {
+          touchStartY = e.touches[0].clientY;
+          isDragging = true;
+        }, { passive: true });
+        
+        document.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          const currentY = e.touches[0].clientY;
+          const deltaY = currentY - touchStartY;
+          const scrollY = window.scrollY;
+          
+          // Detect top overscroll: user dragging down when at top
+          if (scrollY === 0 && deltaY > 0) {
+            overscrollTopAmount = deltaY;
+          } else {
+            overscrollTopAmount = 0;
+          }
+          
+          updateOverscrollText();
+        }, { passive: true });
+        
+        document.addEventListener('touchend', () => {
+          isDragging = false;
+          overscrollTopAmount = 0;
+          updateOverscrollText();
+        }, { passive: true });
+        
+        // Detect overscroll via wheel events (desktop - when using trackpad/mouse wheel)
+        let wheelAccumulator = 0;
+        document.addEventListener('wheel', (e) => {
+          const scrollY = window.scrollY;
+          const isAtTop = scrollY === 0;
+          
+          // Top overscroll: wheel down when at top
+          if (isAtTop && e.deltaY < 0) {
+            wheelAccumulator += Math.abs(e.deltaY);
+            overscrollTopAmount = Math.min(wheelAccumulator, 200);
+          } else {
+            wheelAccumulator = 0;
+            overscrollTopAmount = 0;
+          }
+          
+          updateOverscrollText();
+          
+          // Reset accumulator after a delay
+          clearTimeout(window.wheelResetTimeout);
+          window.wheelResetTimeout = setTimeout(() => {
+            const currentScrollY = window.scrollY;
+            const stillAtTop = currentScrollY === 0;
+            
+            if (!stillAtTop) {
+              wheelAccumulator = 0;
+              overscrollTopAmount = 0;
+              updateOverscrollText();
+            }
+          }, 300);
+        }, { passive: true });
+        
+        // Initial check
+        updateOverscrollText();
       })();
     </script>
   </body>

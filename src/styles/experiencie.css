@@ -79,6 +79,10 @@
   .jobs {
     flex-direction: row;
   }
+  /* Prevent job-title sidebar from growing when active tab becomes bold */
+  .job-title {
+    min-width: 18rem;
+  }
 }
 
 .job-title {
